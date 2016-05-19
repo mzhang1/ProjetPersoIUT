@@ -1,5 +1,5 @@
 <?php
-try //co a la bdd
+try //connexion à la bdd
 {
     $db = new PDO('mysql:host=localhost;dbname=profil', 'root', '');
     $db->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);      
