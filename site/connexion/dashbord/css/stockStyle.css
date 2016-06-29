@@ -35,7 +35,8 @@
 }
 
 /* Boutons */
-.productContainer .tableProductContainer .createNewProduct{
+.productContainer .tableProductContainer .createNewProduct,
+.productContainer .tableProductContainer .confirmModifications{
     margin-bottom: 10px;
 }
 

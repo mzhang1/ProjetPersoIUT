@@ -124,5 +124,27 @@
             $produits = $this->getProductList($record_id);
             return array("fileId" => $record_id,"produits" => $produits);
         }
+
+        public function updateFileProduct($record_id,$product_id,$product_name,$product_category,
+            $product_price,$product_supplier){
+            $req = "UPDATE produit
+                SET nom = :name,pu = :price
+                WHERE id = :id";
+
+            $stmt = $this->prepare($req);
+            $stmt->execute(array(":name" => $product_name,":price" => $product_price, ":id" => $product_id));
+
+            $produits = $this->getProductList($record_id);
+            return array("updatedProductId" => $product_id,"produits" => $produits);
+        }
+
+        public function deleteFileProduct($product_id,$record_id){
+            $req = "DELETE FROM produit WHERE id = :id";
+            $stmt = $this->prepare($req);
+            $stmt->execute(array(":id" => $product_id));
+
+            $produits = $this->getProductList($record_id);
+            return array("deletedProductId" => $product_id,"produits" => $produits);
+        }
 	}
 ?>

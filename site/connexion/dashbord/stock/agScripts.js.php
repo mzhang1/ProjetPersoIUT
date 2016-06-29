@@ -135,13 +135,61 @@ function loadProductWindow(){
 
         $tableRow.click({rowIndex: i,product: produits[i]},function(event){
             var product = event.data.product;
+            var productId = event.data.product.productId;
+
             $table.find(".productTableRow").removeClass("activeRow");
             $table.find(".productTableRow").eq(event.data.rowIndex).addClass("activeRow");
 
+            var $saveButton = $(document).find('.confirmModifications');
             var $deleteButton = $(document).find('.deleteProduct');
+            $saveButton.attr("disabled",false);
             $deleteButton.attr("disabled",false);
-            $deleteButton.click({id: produits[i].productId},function(event){
-                alert(event.data.id);
+
+            $saveButton.off().on("click",{id: productId},function(event){
+                var productName = $headerForm.find('.productNameField').val();
+                var productCategory = $headerForm.find('.categoryProductField').val();
+                var productPU = $headerForm.find('.puField').val();
+                var productSupplier = $headerForm.find('.fournisseurField').val();
+
+                $.ajax({
+                    url: "requests.php",
+                    dataType: "json",
+                    data:{
+                        user_id: user_id,
+                        record_id: selected,
+                        product_id: event.data.id,
+                        newProductName: productName,
+                        newProductCategory: productCategory,
+                        newProductPrice: productPU,
+                        newProductSupplier: productSupplier,
+                        req: "updateProduct"
+                    },
+                    success:function(data){
+                        produits = data.produits;
+                        $deleteButton.attr("disabled",true);
+                        $saveButton.attr("disabled",true);
+                        loadProductWindow();
+                    }
+                });
+            });
+
+            $deleteButton.off().on("click",{id: productId},function(event){
+                $.ajax({
+                    url: "requests.php",
+                    dataType: "json",
+                    data:{
+                        user_id: user_id,
+                        record_id: selected,
+                        product_id: event.data.id,
+                        req: "deleteProduct"
+                    },
+                    success:function(data){
+                        produits = data.produits;
+                        $deleteButton.attr("disabled",true);
+                        $saveButton.attr("disabled",true);
+                        loadProductWindow();
+                    }
+                });
             });
 
             var $headerForm = $(document).find('.productForm');
@@ -157,8 +205,6 @@ function loadProductWindow(){
             $headerForm.find('.ptField').val(product.pt);
             $headerForm.find('.fournisseurField').val(product.libelle_fournisseur);
         });
-
-
     }
     $table.append($tableBody);
     $tableProduct.append($table);

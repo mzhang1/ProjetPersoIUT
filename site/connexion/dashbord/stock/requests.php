@@ -15,6 +15,23 @@
             $products = $stockDB->addFileProduct($file_id);
             echo json_encode($products);
             break;
+        case 'updateProduct':
+            $record_id = $_REQUEST['record_id'];
+            $product_id = $_REQUEST['product_id'];
+            $product_name = $_REQUEST['newProductName'];
+            $product_category = $_REQUEST['newProductCategory'];
+            $product_price = $_REQUEST['newProductPrice'];
+            $product_supplier = $_REQUEST['newProductSupplier'];
+            $products = $stockDB->updateFileProduct($record_id,$product_id,$product_name,$product_category,
+                $product_price,$product_supplier);
+            echo json_encode($products);
+            break;
+        case 'deleteProduct':
+            $product_id = $_REQUEST['product_id'];
+            $record_id = $_REQUEST['record_id'];
+            $products = $stockDB->deleteFileProduct($product_id,$record_id);
+            echo json_encode($products);
+            break;
         default:
             echo "No request found";
             break;

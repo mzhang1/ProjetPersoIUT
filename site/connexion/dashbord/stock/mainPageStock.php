@@ -148,6 +148,7 @@ Faire un agenda ou on peut renter des notes
                         </div>
                         <div class="col-md-2 buttonContainer">
                             <button type="button" class="btn btn-primary btn-sm createNewProduct">Créer un nouveau produit</button>
+                            <button type="button" class="btn btn-info btn-sm confirmModifications" disabled="true">Sauvegarder les modifications</button>
                             <button type="button" class="btn btn-danger btn-sm deleteProduct" disabled="true">Supprimer le produit</button>
                         </div>
                     </div>
