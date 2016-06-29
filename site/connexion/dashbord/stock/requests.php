@@ -10,6 +10,11 @@
             $records = $stockDB->getUserStockFiles($user_id);
             echo json_encode($records);
             break;
+        case 'addProduct':
+            $file_id = $_REQUEST['file_id'];
+            $products = $stockDB->addFileProduct($file_id);
+            echo json_encode($products);
+            break;
         default:
             echo "No request found";
             break;

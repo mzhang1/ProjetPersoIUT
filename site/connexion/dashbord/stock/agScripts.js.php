@@ -3,13 +3,30 @@ $(document).ready(function(){
     $entreeStock = $(document).find('.conteneurTableEntree').find('.tableEntree');
     $sortieStock = $(document).find('.conteneurTableSortie');
     getFileData(user_id);
+});
 
-    $(document).find(".affichageListeProduit").click(function(){
-        $(document).find('.stockContainer').css('display','none');
-        $(document).find('.productContainer').css('display','block');
-        if(produits){
-            loadProductWindow();
-        }
+$(document).find(".affichageListeProduit").click(function(){
+    $(document).find('.stockContainer').css('display','none');
+    $(document).find('.productContainer').css('display','block');
+
+    if(produits){
+        loadProductWindow();
+    }
+
+    $(document).find(".createNewProduct").click(function(){
+        $.ajax({
+            url: "requests.php",
+            dataType: "json",
+            data:{
+                user_id: user_id,
+                file_id: selected,
+                req: "addProduct"
+            },
+            success:function(data){
+                produits = data.produits;
+                loadProductWindow();
+            }
+        });
     });
 });
 
@@ -23,17 +40,19 @@ function getFileData(user_id){
         },
         success:function(data){
             selected = parseInt(data.selectedIndex,10);
-            produits = data.produits;
+            produits = [];
+            for(var i=0;i<data.records.length;i++){
+                if(data.records[i].id == selected){
+                    produits = data.records[i].produits;
+                }
+            }
             buildFileSelect($selectContainer,data);
+            $(document).find(".numberProducts").html(produits.length);
             //onLoadEntriesData(data.entree);
             //onLoadOutData(data.sortie);
-        },
-        error:function(){
-            alert("Error");
         }
-    })
+    });
 };
-
 
 function buildFileSelect($container,data){
     var files = data.records;
@@ -88,16 +107,36 @@ function onLoadOutData($container){
 };
 
 /* Chargement des produits */
-/*
 function loadProductWindow(){
     var $tableProduct = $(document).find(".tableProduct");
-    var $table = $('<table class="tableData"></table>');
-    var $tableHeaders = ('<tr></tr>');
-    var productProperties = Object.getOwnPropertyNames(produit[0]);
+    $tableProduct.html("");
+    var $table = $('<table class="table table-bordered tableData"></table>');
+    var $tableHeaders = $('<thead></thead>');
+    $tableHeaderRow = $('<tr></tr>');
+    $tableHeaderRow.append('<th>Nom du produit</th>');
+    $tableHeaderRow.append('<th>Type</th>');
+    $tableHeaderRow.append('<th>Quantité</th>');
+    $tableHeaderRow.append('<th>Prix unitaire</th>');
+    $tableHeaderRow.append('<th>Prix total</th>');
+    $tableHeaderRow.append('<th>Fournisseur</th>');
+    $tableHeaders.append($tableHeaderRow);
+    $table.append($tableHeaders);
 
-    for(var i=0;i<productProperties.length;i++){
-        var $tableHeaderCell = $('<th>'+productProperties[i]+'</th>');
-        $tableHeaders.append($tableHeaderCell);
+    var $tableBody = $('<tbody></tbody>');
+    for(var i=0;i<produits.length;i++){
+        var $tableRow = $('<tr class="productTableRow"></tr>');
+        $tableRow.append("<td>"+produits[i].nomProduit+"</td>");
+        $tableRow.append("<td>"+produits[i].libelle_type+"</td>");
+        $tableRow.append("<td>"+produits[i].qte+"</td>");
+        $tableRow.append("<td>"+produits[i].pu+"</td>");
+        $tableRow.append("<td>"+produits[i].pt+"</td>");
+        $tableRow.append("<td>"+produits[i].libelle_fournisseur+"</td>");
+        $tableBody.append($tableRow);
+
+        $tableRow.click({productId: produits[i].productId},function(event){
+            alert(event.data.productId);
+        });
     }
+    $table.append($tableBody);
+    $tableProduct.append($table);
 };
-*/

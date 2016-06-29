@@ -39,9 +39,11 @@
 
                     $produits = $this->getProductList($record['id']);
                     if(is_array($produits)){
+                        $record['produits'] = $produits;
+
                         /* Récupération des informations des entrées */
                         $req = "SELECT * FROM entrees
-                            JOIN produit ON entrees.id_produit = produit.id
+                            INNER JOIN produit ON entrees.id_produit = produit.id
                             WHERE id_fiche = :id";
                         $stmt = $this->prepare($req);
                         $stmt->execute(array(":id" => $record['id']));
@@ -50,12 +52,12 @@
 
                         /* Récupération des informations des sorties */
                         $req = "SELECT * FROM sorties
-                            JOIN produit ON sorties.id_produit = produit.id
+                            INNER JOIN produit ON sorties.id_produit = produit.id
                             WHERE id_fiche = :id";
                         $stmt = $this->prepare($req);
                         $stmt->execute(array(":id" => $record['id']));
                         $sorties = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                        $record['entrees'] = $sorties;
+                        $record['sorties'] = $sorties;
                     }
 
                     array_push($records,$record);
@@ -74,10 +76,12 @@
         }
 
         private function getProductList($record_id){
-            $req = "SELECT * FROM produit
-                JOIN typeProduit ON produit.type_produit_id = typeProduit.id
-                JOIN fournisseur ON produit.fournisseur_id = fournisseur.id; 
-                WHERE produit.fiche_id = :id";
+            $req = "SELECT produit.id as productId,produit.nom as nomProduit,produit.pu as pu, produit.stkDispo as qte,
+                    (produit.stkDispo * produit.pu) as pt, typeProduit.*, fournisseur.*
+                    FROM produit, typeProduit, fournisseur
+                    WHERE produit.type_produit_id = typeProduit.id
+                    AND produit.fournisseur_id = fournisseur.id
+                    AND produit.fiche_id = :id";
             $stmt = $this->prepare($req);
             $stmt->execute(array(":id" => $record_id));
             $produits = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -94,7 +98,7 @@
                 $lastUsedFileId = $stmt->fetchColumn(0);
             }
 
-            if(!$lastUsedFileId){
+            if(empty($lastUsedFileId)){
                 //Récupération de la première fiche
                 $req = "SELECT id FROM fiche WHERE user_id = :id LIMIT 1";
                 $stmt = $this->prepare($req);
@@ -109,6 +113,16 @@
                 }
             }
             return $lastUsedFileId;
+        }
+
+        public function addFileProduct($record_id){
+            $req = "INSERT INTO produit
+                SET pu = 0,stkDispo = 0,fiche_id = :id,type_produit_id = 1, fournisseur_id = 1";
+            $stmt = $this->prepare($req);
+            $stmt->execute(array(":id" => $record_id));
+
+            $produits = $this->getProductList($record_id);
+            return array("fileId" => $record_id,"produits" => $produits);
         }
 	}
 ?>

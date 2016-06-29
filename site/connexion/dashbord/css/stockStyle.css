@@ -8,12 +8,14 @@
 }
 .tableProductContainer{
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 .tableProductLabel{
     font-size: 15px;
 }
 .tableProduct{
     height: 225px;
+    overflow-y: auto;
 }
 
 .groupForm{
