@@ -1,33 +1,46 @@
+/* Les 2 blocs principaux */
 .stockContainer{
     display: block;
 }
-
-/* Style pour la page de la liste des produits */
 .productContainer{
     display: none;
 }
-.tableProductContainer{
+
+/* Style de la page produits*/
+/* Table des produits */
+.productContainer .tableProductContainer{
     margin-top: 20px;
     margin-bottom: 20px;
 }
-.tableProductLabel{
+
+.productContainer .tableProductContainer .tableProductLabel{
     font-size: 15px;
 }
-.tableProduct{
+
+.productContainer .tableProductContainer .tableProduct{
     height: 225px;
     overflow-y: auto;
 }
-.tableProduct .productTableRow.activeRow{
+
+.productContainer .tableProductContainer .tableProduct .productTableRow.activeRow{
     background-color: skyblue;
 }
 
-.groupForm{
+/* Formulaire des produits */
+.productContainer .formHeader .groupForm{
     margin-top: 20px;
 }
-.groupForm label{
+.productContainer .formHeader .groupForm label{
     line-height: 34px;
 }
 
+/* Boutons */
+.productContainer .tableProductContainer .createNewProduct{
+    margin-bottom: 10px;
+}
+
+
+/* Style de la page principale de la gestion des stocks */
 .selectContainer,
 .productManagementContainer{
     border-style: groove;

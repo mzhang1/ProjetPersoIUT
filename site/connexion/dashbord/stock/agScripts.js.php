@@ -134,8 +134,15 @@ function loadProductWindow(){
         $tableBody.append($tableRow);
 
         $tableRow.click({rowIndex: i,product: produits[i]},function(event){
+            var product = event.data.product;
             $table.find(".productTableRow").removeClass("activeRow");
             $table.find(".productTableRow").eq(event.data.rowIndex).addClass("activeRow");
+
+            var $deleteButton = $(document).find('.deleteProduct');
+            $deleteButton.attr("disabled",false);
+            $deleteButton.click({id: produits[i].productId},function(event){
+                alert(event.data.id);
+            });
 
             var $headerForm = $(document).find('.productForm');
             $headerForm.find('.productNameField').attr("disabled",false);
@@ -143,13 +150,15 @@ function loadProductWindow(){
             $headerForm.find('.puField').attr("disabled",false);
             $headerForm.find('.fournisseurField').attr("disabled",false);
 
-            $headerForm.find('.productNameField').val(event.data.product.nomproduit);
-            $headerForm.find('.categoryProductField').val(event.data.product.libelle_type);
-            $headerForm.find('.qteField').val(event.data.product.qte);
-            $headerForm.find('.puField').val(event.data.product.pu);
-            $headerForm.find('.ptField').val(event.data.product.pt);
-            $headerForm.find('.fournisseurField').val(event.data.product.libelle_fournisseur);
+            $headerForm.find('.productNameField').val(product.nomproduit);
+            $headerForm.find('.categoryProductField').val(product.libelle_type);
+            $headerForm.find('.qteField').val(product.qte);
+            $headerForm.find('.puField').val(product.pu);
+            $headerForm.find('.ptField').val(product.pt);
+            $headerForm.find('.fournisseurField').val(product.libelle_fournisseur);
         });
+
+
     }
     $table.append($tableBody);
     $tableProduct.append($table);

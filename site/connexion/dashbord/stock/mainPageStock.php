@@ -139,13 +139,16 @@ Faire un agenda ou on peut renter des notes
                         </form>
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary createNewProduct">Créer un nouveau produit</button>
                 <div class="row tableProductContainer">
                     <div class="row">
                         <label class="col-md-offset-1 col-md-2 col-xs-12 tableProductLabel">Produits disponibles</label>
                     </div>
                     <div class="row">
-                        <div class="col-md-offset-1 col-md-10 tableProduct">
+                        <div class="col-md-offset-1 col-md-8 tableProduct">
+                        </div>
+                        <div class="col-md-2 buttonContainer">
+                            <button type="button" class="btn btn-primary btn-sm createNewProduct">Créer un nouveau produit</button>
+                            <button type="button" class="btn btn-danger btn-sm deleteProduct" disabled="true">Supprimer le produit</button>
                         </div>
                     </div>
                 </div>
