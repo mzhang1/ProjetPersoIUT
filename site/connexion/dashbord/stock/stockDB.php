@@ -76,6 +76,7 @@
         private function getProductList($record_id){
             $req = "SELECT * FROM produit
                 JOIN typeProduit ON produit.type_produit_id = typeProduit.id
+                JOIN fournisseur ON produit.fournisseur_id = fournisseur.id; 
                 WHERE produit.fiche_id = :id";
             $stmt = $this->prepare($req);
             $stmt->execute(array(":id" => $record_id));
@@ -91,6 +92,21 @@
             }
             else{
                 $lastUsedFileId = $stmt->fetchColumn(0);
+            }
+
+            if(!$lastUsedFileId){
+                //Récupération de la première fiche
+                $req = "SELECT id FROM fiche WHERE user_id = :id LIMIT 1";
+                $stmt = $this->prepare($req);
+                $stmt->execute(array(":id" => $user_id));
+                $firstFileId = $stmt->fetchColumn(0);
+
+                //Mise à jour de la dernière fiche utilisée
+                $req = "UPDATE user SET lastSelectedFile = :lastSelectedFile WHERE user_id = :user_id";
+                $stmt = $this->prepare($req);
+                if($stmt->execute(array(":lastSelectedFile" => $firstFileId, ":user_id" => $user_id))){
+                    $lastUsedFileId = $firstFileId;
+                }
             }
             return $lastUsedFileId;
         }

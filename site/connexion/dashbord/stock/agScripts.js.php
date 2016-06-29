@@ -2,7 +2,18 @@ $(document).ready(function(){
     $selectContainer = $(document).find('.selectContainer');
     $entreeStock = $(document).find('.conteneurTableEntree').find('.tableEntree');
     $sortieStock = $(document).find('.conteneurTableSortie');
+    getFileData(user_id);
 
+    $(document).find(".affichageListeProduit").click(function(){
+        $(document).find('.stockContainer').css('display','none');
+        $(document).find('.productContainer').css('display','block');
+        if(produits){
+            loadProductWindow();
+        }
+    });
+});
+
+function getFileData(user_id){
     $.ajax({
         url: "requests.php",
         dataType: "json",
@@ -11,6 +22,8 @@ $(document).ready(function(){
             req: "getUserRecords"
         },
         success:function(data){
+            selected = parseInt(data.selectedIndex,10);
+            produits = data.produits;
             buildFileSelect($selectContainer,data);
             //onLoadEntriesData(data.entree);
             //onLoadOutData(data.sortie);
@@ -18,8 +31,9 @@ $(document).ready(function(){
         error:function(){
             alert("Error");
         }
-    });
-});
+    })
+};
+
 
 function buildFileSelect($container,data){
     var files = data.records;
@@ -33,13 +47,14 @@ function buildFileSelect($container,data){
         $container.append($select);
         $container.find('.numberFiles').html(numberFiles);
     }
-}
+};
 
 function updateProductInformations($container,data,index){
 
-}
+};
 
 /* Chargement des tables */
+/*
 function onLoadEntriesData(data){
     var columnData = [
         {headerName: "Produit", field: "produit", editable: true, width: 200},
@@ -61,9 +76,28 @@ function onLoadEntriesData(data){
     };
 
     var container = document.querySelector('.tableEntree');
-    new agGrid.Grid(container,params);
+    var entryGrid = new agGrid.Grid(container,params);
+
+    var secondContainer = document.querySelector('.tableSortie');
+    var outGrid = new agGrid.Grid(secondContainer,params);
+};
+*/
+
+function onLoadOutData($container){
+
 };
 
-function buildOutGrid($container){
+/* Chargement des produits */
+/*
+function loadProductWindow(){
+    var $tableProduct = $(document).find(".tableProduct");
+    var $table = $('<table class="tableData"></table>');
+    var $tableHeaders = ('<tr></tr>');
+    var productProperties = Object.getOwnPropertyNames(produit[0]);
 
-}
+    for(var i=0;i<productProperties.length;i++){
+        var $tableHeaderCell = $('<th>'+productProperties[i]+'</th>');
+        $tableHeaders.append($tableHeaderCell);
+    }
+};
+*/

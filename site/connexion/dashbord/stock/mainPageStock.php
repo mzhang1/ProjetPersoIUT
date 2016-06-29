@@ -61,8 +61,7 @@ Faire un agenda ou on peut renter des notes
 
     <div class="container-fluid">
 
-        <div class="row row-offcanvas row-offcanvas-left">
-
+        <div class="row row-offcanvas row-offcanvas-left ">
             <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
               <ul class="nav nav-sidebar">
                 <li><a href="../accueil.php">Accueil</a></li>
@@ -71,6 +70,8 @@ Faire un agenda ou on peut renter des notes
                 <li class="active"><a href="mainPageStock.php">Gestion des stocks</a></li>
               </ul>
             </div><!--/span-->
+
+            <!-- Stock window -->
             <div class="col-sm-9 col-md-10 stockContainer">
               <div class="row">
                 <div class="col-md-offset-1 col-md-4 col-sm-12 selectContainer">
@@ -99,7 +100,58 @@ Faire un agenda ou on peut renter des notes
                 </div>
               </div>
             </div>
-          </div>
+            <!-- End stock window -->
+            <!-- Products window -->
+            <div class="col-sm-9 col-md-10 productContainer">
+                <div class="row formHeader">
+                    <div class="col-md-9 groupForm">
+                        <form>
+                            <div class="form-group row">
+                                <label for="nomProduit" class="col-md-2 form-control-label">Nom du produit</label>
+                                <div class="col-md-4">
+                                  <input id="nomProduit" type="text" class="form-control productNameField" placeholder="Nom du produit">
+                                </div>
+                                <label for="pu" class="col-md-2 form-control-label">Prix unitaire</label>
+                                <div class="col-md-4">
+                                  <input id="pu" type="text" class="form-control qteField" placeholder="Prix unitaire">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="typeProduit" class="col-md-2 form-control-label">Type</label>
+                                <div class="col-md-4">
+                                  <input id="typeProduit" type="text" class="form-control typeProductField" placeholder="Prix unitaire">
+                                </div>
+                                <label for="pt" class="col-md-2 form-control-label">Prix total</label>
+                                <div class="col-md-4">
+                                  <input id="pt" type="text" class="form-control typeProductField" placeholder="Prix total">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="qte" class="col-md-2 form-control-label">Quantité</label>
+                                <div class="col-md-4">
+                                  <input id="qteProduit" type="text" class="form-control productName" placeholder="Quantité">
+                                </div>
+                                <label for="fournisseur" class="col-md-2 form-control-label">Fournisseur</label>
+                                <div class="col-md-4">
+                                  <input id="fournisseur" type="text" class="form-control fournisseurField" placeholder="Fournisseur">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary createNewProduct">Créer un nouveau produit</button>
+                <div class="row tableProductContainer">
+                    <div class="row">
+                        <label class="col-md-offset-1 col-md-2 col-xs-12 tableProductLabel">Produits disponibles</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-10 tableProduct">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End products window -->
+        </div>
     </div><!--/.container-->
 
     <footer>

@@ -1,8 +1,32 @@
+.stockContainer{
+    display: block;
+}
+
+/* Style pour la page de la liste des produits */
+.productContainer{
+    display: none;
+}
+.tableProductContainer{
+    margin-top: 20px;
+}
+.tableProductLabel{
+    font-size: 15px;
+}
+.tableProduct{
+    height: 225px;
+}
+
+.groupForm{
+    margin-top: 20px;
+}
+.groupForm label{
+    line-height: 34px;
+}
+
 .selectContainer,
 .productManagementContainer{
-    border-color: blue;
-    border-style: solid;
-    border-width: 2px;
+    border-style: groove;
+    border-width: 3px;
     padding: 10px 10px 10px 10px;
     margin-top: 25px;
     height: 125px;
