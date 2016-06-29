@@ -17,6 +17,9 @@
     height: 225px;
     overflow-y: auto;
 }
+.tableProduct .productTableRow.activeRow{
+    background-color: skyblue;
+}
 
 .groupForm{
     margin-top: 20px;

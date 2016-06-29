@@ -104,36 +104,36 @@ Faire un agenda ou on peut renter des notes
             <!-- Products window -->
             <div class="col-sm-9 col-md-10 productContainer">
                 <div class="row formHeader">
-                    <div class="col-md-9 groupForm">
+                    <div class="col-md-9 groupForm productForm">
                         <form>
                             <div class="form-group row">
                                 <label for="nomProduit" class="col-md-2 form-control-label">Nom du produit</label>
                                 <div class="col-md-4">
-                                  <input id="nomProduit" type="text" class="form-control productNameField" placeholder="Nom du produit">
+                                  <input id="nomProduit" type="text" class="form-control productNameField" placeholder="Nom du produit" disabled="true">
                                 </div>
                                 <label for="pu" class="col-md-2 form-control-label">Prix unitaire</label>
                                 <div class="col-md-4">
-                                  <input id="pu" type="text" class="form-control qteField" placeholder="Prix unitaire">
+                                  <input id="pu" type="text" class="form-control puField" placeholder="Prix unitaire" disabled="true">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="typeProduit" class="col-md-2 form-control-label">Type</label>
+                                <label for="category" class="col-md-2 form-control-label">Catégorie</label>
                                 <div class="col-md-4">
-                                  <input id="typeProduit" type="text" class="form-control typeProductField" placeholder="Prix unitaire">
+                                  <input id="category" type="text" class="form-control categoryProductField" placeholder="Catégorie" disabled="true">
                                 </div>
                                 <label for="pt" class="col-md-2 form-control-label">Prix total</label>
                                 <div class="col-md-4">
-                                  <input id="pt" type="text" class="form-control typeProductField" placeholder="Prix total">
+                                  <input id="pt" type="text" class="form-control ptField" placeholder="Prix total" disabled="true">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="qte" class="col-md-2 form-control-label">Quantité</label>
                                 <div class="col-md-4">
-                                  <input id="qteProduit" type="text" class="form-control productName" placeholder="Quantité">
+                                  <input id="qte" type="text" class="form-control qteField" placeholder="Quantité" disabled="true">
                                 </div>
                                 <label for="fournisseur" class="col-md-2 form-control-label">Fournisseur</label>
                                 <div class="col-md-4">
-                                  <input id="fournisseur" type="text" class="form-control fournisseurField" placeholder="Fournisseur">
+                                  <input id="fournisseur" type="text" class="form-control fournisseurField" placeholder="Fournisseur" disabled="true">
                                 </div>
                             </div>
                         </form>

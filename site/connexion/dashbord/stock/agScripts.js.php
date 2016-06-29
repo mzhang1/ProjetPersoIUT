@@ -137,8 +137,6 @@ function loadProductWindow(){
             $table.find(".productTableRow").removeClass("activeRow");
             $table.find(".productTableRow").eq(event.data.rowIndex).addClass("activeRow");
 
-            $(document).find(".deleteProduct").attr("disabled","false");
-
             var $headerForm = $(document).find('.productForm');
             $headerForm.find('.productNameField').attr("disabled",false);
             $headerForm.find('.categoryProductField').attr("disabled",false);
