@@ -128,6 +128,11 @@ function loadProductWindow(){
     $tableHeaders.append($tableHeaderRow);
     $table.append($tableHeaders);
 
+    $(document).find(".returnToMainPage").off().on('click',function(){
+        $(document).find('.productContainer').css('display','none');
+        $(document).find('.stockContainer').css('display','block');
+    });
+
     var $tableBody = $('<tbody></tbody>');
     for(var i=0;i<produits.length;i++){
         var $tableRow = $('<tr class="productTableRow"></tr>');

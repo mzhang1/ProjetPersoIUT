@@ -8,8 +8,12 @@
 
 /* Style de la page produits*/
 /* Table des produits */
+.productContainer .returnToMainPage{
+    margin-top: 10px;
+}
+
 .productContainer .tableProductContainer{
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 20px;
 }
 
@@ -37,7 +41,8 @@
 
 /* Boutons */
 .productContainer .tableProductContainer .createNewProduct,
-.productContainer .tableProductContainer .confirmModifications{
+.productContainer .tableProductContainer .confirmModifications,
+.productContainer .tableProductContainer .deleteProduct{
     margin-bottom: 10px;
 }
 

@@ -93,7 +93,7 @@ Faire un agenda ou on peut renter des notes
                 </div>
                 <div class="col-md-6 conteneurTableSortie">
                     <div class="row">
-                        <div class="col-md-12 col-sm-12 tableSortie">
+                        <div class="col-md-12 col-sm-12 tableSortie ag-fresh">
                             <!-- out grid -->
                         </div>
                     </div>
@@ -103,8 +103,13 @@ Faire un agenda ou on peut renter des notes
             <!-- End stock window -->
             <!-- Products window -->
             <div class="col-sm-9 col-md-10 productContainer">
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-3">
+                        <button type="button" class="btn btn-danger returnToMainPage">Retour sur la page des mouvements</button>
+                    </div>
+                </div>
                 <div class="row formHeader">
-                    <div class="col-md-9 groupForm productForm">
+                    <div class="col-md-offset-1 col-md-9 groupForm productForm">
                         <form>
                             <div class="form-group row">
                                 <label for="nomProduit" class="col-md-2 form-control-label">Nom du produit</label>
