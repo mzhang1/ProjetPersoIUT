@@ -44,9 +44,10 @@ function getFileData(user_id){
             for(var i=0;i<data.records.length;i++){
                 if(data.records[i].id == selected){
                     produits = data.records[i].produits;
+                    $(document).find(".stockFileName").html(data.records[i].nom);
                 }
             }
-            buildFileSelect($selectContainer,data);
+            buildFileSelect($selectContainer,data,selected);
             $(document).find(".numberProducts").html(produits.length);
             //onLoadEntriesData(data.entree);
             //onLoadOutData(data.sortie);
@@ -54,13 +55,18 @@ function getFileData(user_id){
     });
 };
 
-function buildFileSelect($container,data){
+function buildFileSelect($container,data,selected){
     var files = data.records;
     var numberFiles = files.length;
     if(numberFiles != 0){
         $select = $('<select class="fileSelect"></select>');
         for(var i=0;i < numberFiles; i++){
-            $option = $('<option value="'+files[i].id+'">'+files[i].id+" -- "+files[i].nom+'</option>');
+            if(files[i].id == selected){
+                $option = $('<option value="'+files[i].id+'" selected>'+files[i].id+" -- "+files[i].nom+'</option>');
+            }
+            else{
+                $option = $('<option value="'+files[i].id+'">'+files[i].id+" -- "+files[i].nom+'</option>');
+            }
             $select.append($option);
         }
         $container.append($select);
@@ -145,6 +151,19 @@ function loadProductWindow(){
             $saveButton.attr("disabled",false);
             $deleteButton.attr("disabled",false);
 
+            var $headerForm = $(document).find('.productForm');
+            $headerForm.find('.productNameField').attr("disabled",false);
+            $headerForm.find('.categoryProductField').attr("disabled",false);
+            $headerForm.find('.puField').attr("disabled",false);
+            $headerForm.find('.fournisseurField').attr("disabled",false);
+
+            $headerForm.find('.productNameField').val(product.nomProduit);
+            $headerForm.find('.categoryProductField').val(product.libelle_type);
+            $headerForm.find('.qteField').val(product.qte);
+            $headerForm.find('.puField').val(product.pu);
+            $headerForm.find('.ptField').val(product.pt);
+            $headerForm.find('.fournisseurField').val(product.libelle_fournisseur);
+
             $saveButton.off().on("click",{id: productId},function(event){
                 var productName = $headerForm.find('.productNameField').val();
                 var productCategory = $headerForm.find('.categoryProductField').val();
@@ -168,6 +187,19 @@ function loadProductWindow(){
                         produits = data.produits;
                         $deleteButton.attr("disabled",true);
                         $saveButton.attr("disabled",true);
+
+                        $headerForm.find('.productNameField').attr("disabled",true);
+                        $headerForm.find('.categoryProductField').attr("disabled",true);
+                        $headerForm.find('.puField').attr("disabled",true);
+                        $headerForm.find('.fournisseurField').attr("disabled",true);
+
+                        $headerForm.find('.productNameField').val("");
+                        $headerForm.find('.categoryProductField').val("");
+                        $headerForm.find('.qteField').val("");
+                        $headerForm.find('.puField').val("");
+                        $headerForm.find('.ptField').val("");
+                        $headerForm.find('.fournisseurField').val("");
+
                         loadProductWindow();
                     }
                 });
@@ -187,23 +219,23 @@ function loadProductWindow(){
                         produits = data.produits;
                         $deleteButton.attr("disabled",true);
                         $saveButton.attr("disabled",true);
+
+                        $headerForm.find('.productNameField').attr("disabled",true);
+                        $headerForm.find('.categoryProductField').attr("disabled",true);
+                        $headerForm.find('.puField').attr("disabled",true);
+                        $headerForm.find('.fournisseurField').attr("disabled",true);
+
+                        $headerForm.find('.productNameField').val("");
+                        $headerForm.find('.categoryProductField').val("");
+                        $headerForm.find('.qteField').val("");
+                        $headerForm.find('.puField').val("");
+                        $headerForm.find('.ptField').val("");
+                        $headerForm.find('.fournisseurField').val("");
+
                         loadProductWindow();
                     }
                 });
             });
-
-            var $headerForm = $(document).find('.productForm');
-            $headerForm.find('.productNameField').attr("disabled",false);
-            $headerForm.find('.categoryProductField').attr("disabled",false);
-            $headerForm.find('.puField').attr("disabled",false);
-            $headerForm.find('.fournisseurField').attr("disabled",false);
-
-            $headerForm.find('.productNameField').val(product.nomproduit);
-            $headerForm.find('.categoryProductField').val(product.libelle_type);
-            $headerForm.find('.qteField').val(product.qte);
-            $headerForm.find('.puField').val(product.pu);
-            $headerForm.find('.ptField').val(product.pt);
-            $headerForm.find('.fournisseurField').val(product.libelle_fournisseur);
         });
     }
     $table.append($tableBody);

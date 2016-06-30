@@ -79,7 +79,7 @@ Faire un agenda ou on peut renter des notes
                 </div>
                 <div class="col-md-offset-2 col-md-4 col-sm-12 productManagementContainer">
                     <label class="numberProducts">0</label> produit(s) disponble(s) pour la fiche de stock
-                    <label class="stockFileName">"nom du fichier"</label>
+                    <label class="stockFileName">"nom du fichier"</label>.
                     <button type="button" class="btn btn-primary affichageListeProduit">Afficher la liste des produits</button>
                 </div>
               </div>
