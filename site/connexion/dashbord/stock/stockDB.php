@@ -168,7 +168,7 @@
                 INNER JOIN produit ON entrees.id_produit = produit.id
                 WHERE id_fiche = :id";
             $stmt = $this->prepare($req);
-            $stmt->execute(array(":id" => $record['id']));
+            $stmt->execute(array(":id" => $file_id));
             $entrees = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $entrees;
         }

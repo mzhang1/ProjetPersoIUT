@@ -85,7 +85,10 @@ $(document).find('.createNewEntry').off().on("click", function(){
                     req: "addNewEntry"
                 },
                 success:function(data){
-                    produits = data.produits;
+                    entrees = data.entrees;
+                    var $entreeStockTable = $(document).find('.conteneurTableEntree').find('.tableEntree');
+                    $entreeStockTable.html("");
+                    loadEntriesData();
                 }
             });
         });
@@ -110,6 +113,8 @@ function getFileData(user_id){
             for(var i=0;i<data.records.length;i++){
                 if(data.records[i].id == selected){
                     produits = data.records[i].produits;
+                    entrees = data.records[i].entrees;
+                    sorties = data.records[i].sorties;
                     $(document).find(".stockFileName").html(data.records[i].nom);
                 }
             }
@@ -120,6 +125,13 @@ function getFileData(user_id){
                 $(document).find('.noProductAvailable').css("display","block");
                 $entreeStock.css("display","none");
                 $sortieStock.css("display","none");
+            }
+
+            if(entrees.length > 0){
+                loadEntriesData();
+            }
+            if(sorties.length > 0){
+                loadOutputData();
             }
         },
         async: false
@@ -150,36 +162,44 @@ function updateProductInformations($container,data,index){
 };
 
 /* Chargement des tables */
-/*
-function onLoadEntriesData(data){
-    var columnData = [
-        {headerName: "Produit", field: "produit", editable: true, width: 200},
-        {headerName: "Prix Unitaire", field: "pu", editable: true, width: 60},
-        {headerName: "Total", field: "total", editable: true, width: 60},
-        {headerName: "Date", field: "date", editable: true, width: 70},
-        {headerName: "Fournisseur", field: "supplier", editable: true, width: 150}
-    ];
+function loadEntriesData(){
+    var $tableEntriesContainer = $(document).find('.tableEntree');
+    $tableEntriesContainer.html("");
 
-    var rowData = [
-        {produit: "150", pu:"180",total:"180"},
-        {produit: "180", pu:"210",total:"210"}
-    ];
+    var $entryTable = $('<table class="table table-bordered inputTableData"></table>');
+    var $tableHeaders = $('<thead></thead>');
+    $tableHeaderRow = $('<tr></tr>');
+    $tableHeaderRow.append('<th>Nom du produit</th>');
+    $tableHeaderRow.append('<th>Date d&rsquo;entrée</th>');
+    $tableHeaderRow.append('<th>Quantité</th>');
+    $tableHeaderRow.append('<th>Prix total</th>');
+    $tableHeaders.append($tableHeaderRow);
+    $entryTable.append($tableHeaders);
 
-    var params = {
-        columnDefs : columnData,
-        rowData : rowData,
-        enableColResize: false
-    };
+    var $tableBody = $('<tbody></tbody>');
+    for(var i=0;i<entrees.length;i++){
+        var $tableRow = $('<tr class="entryTableRow"></tr>');
 
-    var container = document.querySelector('.tableEntree');
-    var entryGrid = new agGrid.Grid(container,params);
+        var produit = {};
+        for(var j=0; j<produits.length; j++){
+            if(produits[j].productId == entrees[i].id_produit){
+                produit = produits[j];
+                break;
+            }
+        }
 
-    var secondContainer = document.querySelector('.tableSortie');
-    var outGrid = new agGrid.Grid(secondContainer,params);
+        $tableRow.append("<td>"+produit.nomProduit+"</td>");
+        $tableRow.append("<td>"+entrees[i].dateEntree+"</td>");
+        $tableRow.append("<td>"+entrees[i].qteEntree+"</td>");
+        $tableRow.append("<td>"+(produit.pu*entrees[i].qteEntree)+"</td>");
+        $tableBody.append($tableRow);
+    }
+    $entryTable.append($tableBody);
+
+    $tableEntriesContainer.append($entryTable);
 };
-*/
 
-function onLoadOutData($container){
+function onLoadOutputData(){
 
 };
 

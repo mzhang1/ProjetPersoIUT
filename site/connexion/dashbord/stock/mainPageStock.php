@@ -96,9 +96,9 @@ Faire un agenda ou on peut renter des notes
                   <div class="col-md-6 conteneurTableSortie">
                       <div class="row">
                           <div class="col-md-12 col-sm-12 tableSortie">
-                              <!-- out grid -->
+                              <!-- output grid -->
                           </div>
-                          <button type="button" class="btn btn-primary btn-sm createNewOutage">Créer une nouvelle sortie</button>
+                          <button type="button" class="btn btn-primary btn-sm createNewOutput">Créer une nouvelle sortie</button>
                       </div>
                   </div>
               </div>

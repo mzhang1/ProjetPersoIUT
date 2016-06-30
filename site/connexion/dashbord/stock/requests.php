@@ -36,7 +36,9 @@
             $qty_product = $_REQUEST['qty'];
             $product_id = $_REQUEST['productId'];
             $record_id = $_REQUEST['record_id'];
-            $products = $stockDB->addNewEntry($product_id,$record_id,$qty_product);
+            $entries = $stockDB->addNewEntry($product_id,$record_id,$qty_product);
+            echo json_encode($entries);
+            break;
         default:
             echo "No request found";
             break;
