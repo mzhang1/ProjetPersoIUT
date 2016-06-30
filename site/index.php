@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/Logo_simplyETL.jpg" type="image/x-icon">
 
     <title>SimplyETL</title>
 
@@ -35,7 +35,7 @@
 
 <body id="page-top">
 
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top" style="background-color: #444;">
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top" style="background-color: black">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -45,7 +45,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">LOGO</a>
+               
+		<a>
+		    <img height="50px" width="100px" src="img/Logo_simplyETL.jpg">
+		</a>
+		<a class="navbar-brand page-scroll" href="#page-top">  
+		    
+		</a>
+		
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -73,7 +80,7 @@
 		    <h1 style="color: #444;">-->
 		
 		 <h1><br/><br/><br/><br/><br/><br/>
-		    Simplifiez-vous <br/>la vie avec SimplyETL 
+		    Simplifiez votre gestion <br/>administrative avec SimplyETL 
 		</h1>
                 
               <!--  

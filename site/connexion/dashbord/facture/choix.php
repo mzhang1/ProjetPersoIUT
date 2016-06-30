@@ -1,18 +1,3 @@
-
-
-<?php
-
-?>
-<!-- 
-Système possibilité du stock :
-Ajouter / supprimer / modifier des produits (avec des représentation kpi voir bootstrap dashbord)
-
-Système possibilité de facture :
-Ajouter / supprimer / modifier des factures avec des exports pdf (voir php fpdf)
-
-Système de planning :
-Faire un agenda ou on peut renter des notes  
--->
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -21,11 +6,11 @@ Faire un agenda ou on peut renter des notes
 		<title>Dashboard</title>
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
 		<!--[if lt IE 9]>
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<link href="css/styles.css" rel="stylesheet">
+		<link href="../css/styles.css" rel="stylesheet">
 	</head>
 	<body>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -59,7 +44,7 @@ Faire un agenda ou on peut renter des notes
          <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
            
             <ul class="nav nav-sidebar">
-	      <li class="active"><a href="accueil.php">Acceuil</a></li>
+	      <li class="active"><a href="../accueil.php">Acceuil</a></li>
              <!-- <li><a href="#">Lien à faire</a></li>
               <li><a href="#">Lien à faire</a></li>-->
             </ul>
@@ -77,25 +62,20 @@ Faire un agenda ou on peut renter des notes
 
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder text-center">
-		<a href="Calendar/index.php">
-		    <img src="img/planning.jpg" height="" width="" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">
-              <h4>Gestion de planning</h4>
+		<img src="img/act.png" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">
+		<a href="action/action.php">
+		  <h4>Ajouter / Modifier / Supprimer des produits</h4>
               <span class="text-muted"></span>
 	    </a> 
             </div>
+	      
             <div class="col-xs-6 col-sm-3 placeholder text-center">
-		<a href="facture/choix.php">
-		<img src="img/facture.jpg" height="" width="" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">
-              <h4>Gestion de facture</h4>
+		<img src="img/crea-facture.png"  height="75px" width="75px"class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">
+		
+		<a href="index.php">
+		 <h4>Créer des factures</h4>
               <span class="text-muted"></span>
 	    </a>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-		<a href="stock/mainPageStock.php">
-		    <img src="img/stock.jpg" height="" width="" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">
-              <h4>Gestion de stock</h4>
-              <span class="text-muted"></span>
-		</a>
             </div>
             
           </div>

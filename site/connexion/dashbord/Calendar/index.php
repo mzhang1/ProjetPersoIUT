@@ -11,6 +11,9 @@ $events = $req->fetchAll();
 
 ?>
 
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,7 +77,7 @@ $events = $req->fetchAll();
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="../accueil.php">Menu</a>
+                        <a href="../accueil.php">Retour au menu</a>
                     </li>
                 </ul>
             </div>

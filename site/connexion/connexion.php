@@ -58,7 +58,7 @@ if(isset($_POST['connexion']))
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-         <link rel="icon" href="../favicon.ico" type="image/x-icon">
+         <link rel="icon" href="../img/Logo_simplyETL.jpg" type="image/x-icon">
 	<title>Connexion</title>
 	<!-- CSS Login -->
         <link rel="stylesheet" href="css/reset.css">
@@ -76,7 +76,7 @@ if(isset($_POST['connexion']))
 <body>
 <!-- Entête de la page -->
 
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top" style="background-color: #444;">
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top" style="background-color: black">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -86,7 +86,9 @@ if(isset($_POST['connexion']))
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="../index.php">LOGO</a>
+                <a>
+		    <img height="50px" width="100px" src="../img/Logo_simplyETL.jpg">
+		</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
