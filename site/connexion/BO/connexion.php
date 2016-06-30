@@ -1,19 +1,19 @@
 ﻿<?php session_start(); ?>
 
-   
+
 <?php
 $thisPage = 'connexion';
 
-// si le bouton connexion a été appuyer
+// si le bouton connexion a été appuyé
 if(isset($_POST['connexion']))
 {
-    // Si les 2 champs sont rempli
+    // Si les 2 champs sont remplis
     if($_POST['user_email'] != '' && $_POST['user_mdp'] != '')
     {
         require('../include/PDO.php');
         $c = new Connexion();
         $rep = $c->verif_user($_POST['user_email'], sha1($_POST['user_mdp']));
-        
+
         if($rep != NULL)
         {
             $_SESSION['user_id'] = $rep['user_id'];
@@ -30,8 +30,8 @@ if(isset($_POST['connexion']))
             $_SESSION['user_mdp'] = $rep['user_mdp'];
             $_SESSION['user_admin'] = $rep['user_admin'];
 
-           //lien user à mettre 
-            
+           //lien user à mettre
+
             header('Location: ../BO/administration.php');
             exit();
         }
@@ -65,7 +65,7 @@ if(isset($_POST['connexion']))
         <link rel="stylesheet" href="../css/animate.css">
         <link rel="stylesheet" href="../css/styles.css">
         <!-- Bootstrap Core CSS -->
-        <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">   
+        <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css" type="text/css">
 	<!-- Plugin CSS -->
 	<link rel="stylesheet" href="../css/animate.min.css" type="text/css">
@@ -106,4 +106,3 @@ if(isset($_POST['connexion']))
 
 <!-- Custom Theme JavaScript -->
     <script src="../js/creative.js"></script>
-

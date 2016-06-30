@@ -3,7 +3,7 @@
 <?php
 
 ?>
-<!-- 
+<!--
 Système possibilité du stock :
 Ajouter / supprimer / modifier des produits (avec des représentation kpi voir bootstrap dashbord)
 
@@ -11,7 +11,7 @@ Système possibilité de facture :
 Ajouter / supprimer / modifier des factures avec des exports pdf (voir php fpdf)
 
 Système de planning :
-Faire un agenda ou on peut renter des notes  
+Faire un agenda ou on peut renter des notes
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -47,32 +47,32 @@ Faire un agenda ou on peut renter des notes
 	   <li><a href="mes_informations.php">Modifier mon profil</a></li>
 	   <li><a href="deconnexion.php">Déconnexion</a></li>
           </ul>
-          
+
         </div>
       </div>
 </nav>
 
 <div class="container-fluid">
-      
+
       <div class="row row-offcanvas row-offcanvas-left">
-        
+
          <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
-           
+
             <ul class="nav nav-sidebar">
-	      <li class="active"><a href="accueil.php">Acceuil</a></li>
+	      <li class="active"><a href="accueil.php">Accueil</a></li>
              <!-- <li><a href="#">Lien à faire</a></li>
               <li><a href="#">Lien à faire</a></li>-->
             </ul>
-          
+
         </div><!--/span-->
-        
+
         <div class="col-sm-9 col-md-10 main">
-          
+
           <!--toggle sidebar button-->
           <p class="visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
           </p>
-          
+
 	<h1 class="page-header">Dashboard</h1>
 
           <div class="row placeholders">
@@ -81,7 +81,7 @@ Faire un agenda ou on peut renter des notes
 		    <img src="img/planning.jpg" height="" width="" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">
               <h4>Gestion de planning</h4>
               <span class="text-muted"></span>
-	    </a> 
+	    </a>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder text-center">
 		<a href="facture/choix.php">
@@ -97,7 +97,7 @@ Faire un agenda ou on peut renter des notes
               <span class="text-muted"></span>
 		</a>
             </div>
-            
+
           </div>
 
 	</div>
@@ -106,7 +106,7 @@ Faire un agenda ou on peut renter des notes
 <footer>
   <p class="pull-right">Copyright ©2016 SimplyETL, Inc.</p>
 </footer>
-        
+
 	<!-- script references -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
