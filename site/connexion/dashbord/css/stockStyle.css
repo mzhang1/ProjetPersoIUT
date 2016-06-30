@@ -59,7 +59,6 @@
 
 .stockContainer .creationFicheStock{
     display: block;
-    margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -84,6 +83,10 @@
     margin-top: 25px;
 }
 
+.stockContainer .stockTiles .newFileDiv{
+    margin-top: 15px;
+}
+
 .conteneurTable .conteneurTableEntree,
 .conteneurTable .conteneurTableSortie{
     height: 350px;
@@ -98,7 +101,7 @@
 
 .conteneurTable .conteneurTableEntree .createNewEntry,
 .conteneurTable .conteneurTableSortie .createNewOutput{
-    display: block;
+    display: none;
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;

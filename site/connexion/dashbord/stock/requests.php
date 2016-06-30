@@ -6,6 +6,11 @@
     $requestName = $_REQUEST['req'];
 
     switch ($requestName) {
+        case 'addFile':
+            $newFileName = $_REQUEST['newFileName'];
+            $status = $stockDB->addFile($newFileName,$user_id);
+            echo json_encode($status);
+            break;
         case 'getUserRecords':
             $records = $stockDB->getUserStockFiles($user_id);
             echo json_encode($records);
@@ -44,6 +49,11 @@
             $product_id = $_REQUEST['productId'];
             $record_id = $_REQUEST['record_id'];
             $updatedData = $stockDB->addNewOutput($product_id,$record_id,$qty_product);
+            echo json_encode($updatedData);
+            break;
+        case "updateLastUsedFile":
+            $lastUsedFileId = $_REQUEST['newSelectedId'];
+            $updatedData = $stockDB->updateLastUsedFile($user_id,$lastUsedFileId);
             echo json_encode($updatedData);
             break;
         default:

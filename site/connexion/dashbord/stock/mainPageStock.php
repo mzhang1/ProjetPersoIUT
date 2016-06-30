@@ -173,8 +173,7 @@ Faire un agenda ou on peut renter des notes
     <!-- A changer selon la configuration -->
     <script src="../js/jquery-3.0.0.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    <script src="ag-grid-master/dist/ag-grid-custom.js"></script>
-    <script src="agScripts.js.php"></script>
+    <script src="stockScripts.js.php"></script>
     <script src="../js/scripts.js"></script>
   </body>
 </html>

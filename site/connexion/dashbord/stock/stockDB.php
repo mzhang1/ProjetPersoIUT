@@ -21,6 +21,15 @@
             return $stmt->execute(array(":id" => $user_id));
         }
 
+        public function addFile($newFileName,$user_id){
+            $req = "INSERT INTO fiche
+                SET nom = :nom, user_id = :user_id";
+            $stmt = $this->prepare($req);
+            $stmt->execute(array(":nom" => $newFileName,":user_id" => $user_id));
+
+            return array("requete" => "OK");
+        }
+
         public function getUserStockFiles($user_id){
             $req = "SELECT * FROM fiche WHERE user_id = :id";
             $stmt = $this->prepare($req);
@@ -189,6 +198,15 @@
             $stmt->execute(array(":id" => $record_id));
             $sorties = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $sorties;
+        }
+
+        public function updateLastUsedFile($user_id,$lastUsedFileId){
+            $req = "UPDATE user
+                SET lastSelectedFile = :file_id WHERE user_id = :user_id";
+            $stmt = $this->prepare($req);
+            $stmt->execute(array(":file_id" => $lastUsedFileId, ":user_id" => $user_id));
+
+            return array("requete" => "OK","selected" => $lastUsedFileId);
         }
 	}
 ?>
