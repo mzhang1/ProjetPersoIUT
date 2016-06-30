@@ -35,7 +35,8 @@
     margin-top: 20px;
 }
 
-.productContainer .formHeader .groupForm label{
+.productContainer .formHeader .groupForm label,
+.stockContainer .conteneurTable .conteneurTableEntree .entryStockForm label{
     line-height: 34px;
 }
 
@@ -46,11 +47,23 @@
     margin-bottom: 10px;
 }
 
-
 /* Style de la page principale de la gestion des stocks */
+.stockContainer .stockTiles{
+    margin-bottom: 15px;
+}
+
+.stockContainer .conteneurTable .noProductAvailable{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stockContainer .noProductAvailable{
+    display: none;
+}
+
 .selectContainer,
 .productManagementContainer{
-    border-style: groove;
+    border-style: double;
     border-width: 3px;
     padding: 10px 10px 10px 10px;
     margin-top: 25px;
@@ -76,6 +89,12 @@
 .conteneurTable .conteneurTableEntree .tableEntree,
 .conteneurTable .conteneurTableSortie .tableSortie{
     height: 300px;
+}
+
+.conteneurTable .conteneurTableEntree .createNewEntry,
+.conteneurTable .conteneurTableEntree .createNewOutage{
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .fileSelect{

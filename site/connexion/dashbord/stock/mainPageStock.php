@@ -73,7 +73,7 @@ Faire un agenda ou on peut renter des notes
 
             <!-- Stock window -->
             <div class="col-sm-9 col-md-10 stockContainer">
-              <div class="row">
+              <div class="row stockTiles">
                 <div class="col-md-offset-1 col-md-4 col-sm-12 selectContainer">
                     <label class="numberFiles">0</label> fiche(s) disponble(s)
                 </div>
@@ -83,21 +83,24 @@ Faire un agenda ou on peut renter des notes
                     <button type="button" class="btn btn-primary affichageListeProduit">Afficher la liste des produits</button>
                 </div>
               </div>
+              <label class="noProductAvailable">Pas de produit disponible. Veuillez créer au moins un produit pour pouvoir manipuler ses stocks</label>
               <div class="row conteneurTable">
-                <div class="col-md-6 conteneurTableEntree">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 tableEntree ag-fresh">
-                            <!-- entry grid -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 conteneurTableSortie">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 tableSortie ag-fresh">
-                            <!-- out grid -->
-                        </div>
-                    </div>
-                </div>
+                  <div class="col-md-6 conteneurTableEntree">
+                      <div class="row">
+                          <div class="col-md-12 col-sm-12 tableEntree">
+                              <!-- entry grid -->
+                          </div>
+                          <button type="button" class="btn btn-primary btn-sm createNewEntry">Créer une nouvelle entrée</button>
+                      </div>
+                  </div>
+                  <div class="col-md-6 conteneurTableSortie">
+                      <div class="row">
+                          <div class="col-md-12 col-sm-12 tableSortie">
+                              <!-- out grid -->
+                          </div>
+                          <button type="button" class="btn btn-primary btn-sm createNewOutage">Créer une nouvelle sortie</button>
+                      </div>
+                  </div>
               </div>
             </div>
             <!-- End stock window -->

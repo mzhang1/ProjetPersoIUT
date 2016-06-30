@@ -1,7 +1,8 @@
 $(document).ready(function(){
     $selectContainer = $(document).find('.selectContainer');
-    $entreeStock = $(document).find('.conteneurTableEntree').find('.tableEntree');
-    $sortieStock = $(document).find('.conteneurTableSortie');
+    var $entreeStock = $(document).find('.conteneurTableEntree');
+    var $sortieStock = $(document).find('.conteneurTableSortie');
+
     getFileData(user_id);
 });
 
@@ -30,6 +31,36 @@ $(document).find(".affichageListeProduit").click(function(){
     });
 });
 
+$(document).find('.createNewEntry').off().on("click", function(){
+    if(produits.length > 0){
+        var $entreeStockTable = $(document).find('.conteneurTableEntree').find('.tableEntree');
+        var $entreeStockForm = $('<form class="entryStockForm"></form>');
+
+        var $qtyDiv = $('<div class="form-group row"></div>');
+        var $qtyLabel = $('<label for="entryQty" class="col-md-offset-1 col-md-3 form-control-label">Quantité entrée</label>');
+        var $qtyFieldDiv = $('<div class="col-md-7"></div>');
+        var $qtyFieldInput = $('<input id="entryQty" type="text" class="form-control entryQtyField" placeholder="Quantité entrée">');
+        $qtyFieldDiv.append($qtyFieldInput);
+        $qtyDiv.append($qtyLabel);
+        $qtyDiv.append($qtyFieldDiv);
+        $entreeStockForm.append($qtyDiv);
+
+        var $productDiv = $('<div class="form-group row"></div>');
+        var $selectProductLabel = $('<label for="productSelect" class="col-md-offset-1 col-md-3 form-control-label">Produit</label>');
+        var $selectProductDiv = $('<div class="col-md-7"></div>');
+        var $selectProduct = $('<select id="productSelect" type="text" class="form-control productSelect">');
+        $selectProductDiv.append($selectProduct);
+        $productDiv.append($selectProductLabel);
+        $productDiv.append($selectProductDiv);
+        $entreeStockForm.append($productDiv);
+
+        $entreeStockTable.append($entreeStockForm)
+    }
+});
+
+$(document).find('.createNewOutage').off().on("click",function(){
+});
+
 function getFileData(user_id){
     $.ajax({
         url: "requests.php",
@@ -49,8 +80,12 @@ function getFileData(user_id){
             }
             buildFileSelect($selectContainer,data,selected);
             $(document).find(".numberProducts").html(produits.length);
-            //onLoadEntriesData(data.entree);
-            //onLoadOutData(data.sortie);
+
+            if(produits.length <= 0){
+                $(document).find('.noProductAvailable').css("display","block");
+                $entreeStock.css("display","none");
+                $sortieStock.css("display","none");
+            }
         }
     });
 };
