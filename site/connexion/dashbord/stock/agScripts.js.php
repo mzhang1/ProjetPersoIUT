@@ -85,6 +85,7 @@ $(document).find('.createNewEntry').off().on("click", function(){
                     req: "addNewEntry"
                 },
                 success:function(data){
+                    produits = data.products;
                     entrees = data.entrees;
                     var $entreeStockTable = $(document).find('.conteneurTableEntree').find('.tableEntree');
                     $entreeStockTable.html("");
@@ -97,6 +98,71 @@ $(document).find('.createNewEntry').off().on("click", function(){
     }
 });
 
+$(document).find('.createNewOutput').off().on("click", function(){
+    if(produits.length > 0){
+        var $sortieStockTable = $(document).find('.conteneurTableSortie').find('.tableSortie');
+        $sortieStockTable.html("");
+        var $sortieStockForm = $('<form class="sortieStockForm"></form>');
+
+        var $sortieStockFormTitle = $('<h3 class="text-center outputStockFormTitle">Création d&rsquo;une sortie</h3>');
+        $sortieStockForm.append($sortieStockFormTitle);
+
+        var $qtyDiv = $('<div class="form-group row"></div>');
+        var $qtyLabel = $('<label for="outputQty" class="col-md-offset-1 col-md-3 form-control-label">Quantité sortie</label>');
+        var $qtyFieldDiv = $('<div class="col-md-7"></div>');
+        var $qtyFieldInput = $('<input id="outputQty" type="text" class="form-control outputQtyField" placeholder="Quantité sortie">');
+        $qtyFieldDiv.append($qtyFieldInput);
+        $qtyDiv.append($qtyLabel);
+        $qtyDiv.append($qtyFieldDiv);
+        $sortieStockForm.append($qtyDiv);
+
+        var $productDiv = $('<div class="form-group row"></div>');
+        var $selectProductLabel = $('<label for="productSelect" class="col-md-offset-1 col-md-3 form-control-label">Produit</label>');
+        var $selectProductDiv = $('<div class="col-md-7"></div>');
+        var $selectProduct = $('<select id="productSelect" class="form-control outputProductSelect">');
+
+        for(var i=0; i<produits.length; i++){
+            var $productSelectOption = $('<option value="'+produits[i].productId+'">'+produits[i].productId+' -- '+produits[i].nomProduit+'</option>');
+            $selectProduct.append($productSelectOption);
+        }
+
+        $selectProductDiv.append($selectProduct);
+        $productDiv.append($selectProductLabel);
+        $productDiv.append($selectProductDiv);
+        $sortieStockForm.append($productDiv);
+
+        $validateOutputButtonDiv = $('<div class="col-md-offset-4 col-md-4"></div>');
+        $validateOutputButton = $('<button type="button" class="btn btn-primary btn-sm confirmSortieCreation">Sauvegarder la sortie</button>');
+        $validateOutputButtonDiv.append($validateOutputButton);
+        $sortieStockForm.append($validateOutputButtonDiv);
+
+        $validateOutputButton.off().on("click",function(){
+            var quantite = $(document).find(".outputQtyField").val();
+            var selectedProduct = $(document).find(".outputProductSelect").val();
+
+            $.ajax({
+                url: "requests.php",
+                dataType: "json",
+                data:{
+                    user_id: user_id,
+                    qty: quantite,
+                    productId: selectedProduct,
+                    record_id: selected,
+                    req: "addNewOutput"
+                },
+                success:function(data){
+                    produits = data.products;
+                    sorties = data.sorties;
+                    var $sortieStockTable = $(document).find('.conteneurTableSortie').find('.tableSortie');
+                    $sortieStockTable.html("");
+                    loadOutputsData();
+                }
+            });
+        });
+
+        $sortieStockTable.append($sortieStockForm);
+    }
+});
 
 
 function getFileData(user_id){
@@ -131,7 +197,7 @@ function getFileData(user_id){
                 loadEntriesData();
             }
             if(sorties.length > 0){
-                loadOutputData();
+                loadOutputsData();
             }
         },
         async: false
@@ -155,10 +221,6 @@ function buildFileSelect($container,data,selected){
         $container.append($select);
         $container.find('.numberFiles').html(numberFiles);
     }
-};
-
-function updateProductInformations($container,data,index){
-
 };
 
 /* Chargement des tables */
@@ -199,8 +261,41 @@ function loadEntriesData(){
     $tableEntriesContainer.append($entryTable);
 };
 
-function onLoadOutputData(){
+function loadOutputsData(){
+    var $tableOutputsContainer = $(document).find('.tableSortie');
+    $tableOutputsContainer.html("");
 
+    var $outputTable = $('<table class="table table-bordered outputTableData"></table>');
+    var $tableHeaders = $('<thead></thead>');
+    $tableHeaderRow = $('<tr></tr>');
+    $tableHeaderRow.append('<th>Nom du produit</th>');
+    $tableHeaderRow.append('<th>Date de sortie</th>');
+    $tableHeaderRow.append('<th>Quantité</th>');
+    $tableHeaderRow.append('<th>Prix total</th>');
+    $tableHeaders.append($tableHeaderRow);
+    $outputTable.append($tableHeaders);
+
+    var $tableBody = $('<tbody></tbody>');
+    for(var i=0;i<sorties.length;i++){
+        var $tableRow = $('<tr class="outputTableRow"></tr>');
+
+        var produit = {};
+        for(var j=0; j<produits.length; j++){
+            if(produits[j].productId == sorties[i].id_produit){
+                produit = produits[j];
+                break;
+            }
+        }
+
+        $tableRow.append("<td>"+produit.nomProduit+"</td>");
+        $tableRow.append("<td>"+sorties[i].dateSortie+"</td>");
+        $tableRow.append("<td>"+sorties[i].qteSortie+"</td>");
+        $tableRow.append("<td>"+(produit.pu*sorties[i].qteSortie)+"</td>");
+        $tableBody.append($tableRow);
+    }
+    $outputTable.append($tableBody);
+
+    $tableOutputsContainer.append($outputTable);
 };
 
 /* Chargement des produits */

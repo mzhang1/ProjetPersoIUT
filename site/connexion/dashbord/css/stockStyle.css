@@ -36,7 +36,8 @@
 }
 
 .productContainer .formHeader .groupForm label,
-.stockContainer .conteneurTable .conteneurTableEntree .entryStockForm label{
+.stockContainer .conteneurTable .conteneurTableEntree .entryStockForm label,
+.stockContainer .conteneurTable .conteneurTableSortie .sortieStockForm label{
     line-height: 34px;
 }
 
@@ -103,7 +104,8 @@
     margin-right: auto;
 }
 
-.stockContainer .conteneurTable .entryStockFormTitle{
+.stockContainer .conteneurTable .entryStockFormTitle
+.stockContainer .conteneurTable .outputStockFormTitle{
     margin-bottom: 20px;
 }
 

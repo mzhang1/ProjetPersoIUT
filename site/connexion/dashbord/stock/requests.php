@@ -36,8 +36,15 @@
             $qty_product = $_REQUEST['qty'];
             $product_id = $_REQUEST['productId'];
             $record_id = $_REQUEST['record_id'];
-            $entries = $stockDB->addNewEntry($product_id,$record_id,$qty_product);
-            echo json_encode($entries);
+            $updatedData = $stockDB->addNewEntry($product_id,$record_id,$qty_product);
+            echo json_encode($updatedData);
+            break;
+        case 'addNewOutput':
+            $qty_product = $_REQUEST['qty'];
+            $product_id = $_REQUEST['productId'];
+            $record_id = $_REQUEST['record_id'];
+            $updatedData = $stockDB->addNewOutput($product_id,$record_id,$qty_product);
+            echo json_encode($updatedData);
             break;
         default:
             echo "No request found";

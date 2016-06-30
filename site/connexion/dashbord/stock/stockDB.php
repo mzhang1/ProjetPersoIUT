@@ -42,21 +42,11 @@
                         $record['produits'] = $produits;
 
                         /* Récupération des informations des entrées */
-                        $req = "SELECT * FROM entrees
-                            INNER JOIN produit ON entrees.id_produit = produit.id
-                            WHERE id_fiche = :id";
-                        $stmt = $this->prepare($req);
-                        $stmt->execute(array(":id" => $record['id']));
-                        $entrees = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        $entrees = $this->getFileEntries($record['id']);
                         $record['entrees'] = $entrees;
 
                         /* Récupération des informations des sorties */
-                        $req = "SELECT * FROM sorties
-                            INNER JOIN produit ON sorties.id_produit = produit.id
-                            WHERE id_fiche = :id";
-                        $stmt = $this->prepare($req);
-                        $stmt->execute(array(":id" => $record['id']));
-                        $sorties = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        $sorties = $this->getFileOutputs($record['id']);
                         $record['sorties'] = $sorties;
                     }
 
@@ -157,10 +147,11 @@
                 SET stkDispo = stkDispo + :ajout
                 WHERE id = :id";
             $stmt = $this->prepare($req);
-            $stmt->execute(array(":ajout" => $qty,":id" => $record_id));
+            $stmt->execute(array(":ajout" => $qty,":id" => $product_id));
 
             $entries = $this->getFileEntries($record_id);
-            return array("fileId" => $record_id, "entrees" => $entries);
+            $products = $this->getProductList($record_id);
+            return array("fileId" => $record_id, "entrees" => $entries, "products" => $products);
         }
 
         public function getFileEntries($file_id){
@@ -171,6 +162,33 @@
             $stmt->execute(array(":id" => $file_id));
             $entrees = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $entrees;
+        }
+
+        public function addNewOutput($product_id,$record_id,$qty){
+            $req = "INSERT INTO sorties
+                SET qteSortie = :qty, dateSortie = CURDATE(), id_fiche = :record_id, id_produit = :product_id";
+            $stmt = $this->prepare($req);
+            $stmt->execute(array(":qty" => $qty,":record_id" => $record_id,":product_id" => $product_id));
+
+            $req = "UPDATE produit
+                SET stkDispo = stkDispo - :sorties
+                WHERE id = :id";
+            $stmt = $this->prepare($req);
+            $stmt->execute(array(":sorties" => $qty,":id" => $product_id));
+
+            $outputs = $this->getFileOutputs($record_id);
+            $products = $this->getProductList($record_id);
+            return array("fileId" => $record_id, "sorties" => $outputs, "products" => $products);
+        }
+
+        public function getFileOutputs($record_id){
+            $req = "SELECT * FROM sorties
+                INNER JOIN produit ON sorties.id_produit = produit.id
+                WHERE id_fiche = :id";
+            $stmt = $this->prepare($req);
+            $stmt->execute(array(":id" => $record_id));
+            $sorties = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $sorties;
         }
 	}
 ?>
