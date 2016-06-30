@@ -32,6 +32,11 @@
             $products = $stockDB->deleteFileProduct($product_id,$record_id);
             echo json_encode($products);
             break;
+        case 'addNewEntry':
+            $qty_product = $_REQUEST['qty'];
+            $product_id = $_REQUEST['productId'];
+            $record_id = $_REQUEST['record_id'];
+            $products = $stockDB->addNewEntry($product_id,$record_id,$qty_product);
         default:
             echo "No request found";
             break;

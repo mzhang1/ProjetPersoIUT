@@ -83,7 +83,7 @@ Faire un agenda ou on peut renter des notes
                     <button type="button" class="btn btn-primary affichageListeProduit">Afficher la liste des produits</button>
                 </div>
               </div>
-              <label class="noProductAvailable">Pas de produit disponible. Veuillez créer au moins un produit pour pouvoir manipuler ses stocks</label>
+              <label class="noProductAvailable text-center">Pas de produit disponible. Veuillez créer au moins un produit pour pouvoir manipuler ses stocks</label>
               <div class="row conteneurTable">
                   <div class="col-md-6 conteneurTableEntree">
                       <div class="row">

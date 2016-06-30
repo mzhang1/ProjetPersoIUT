@@ -146,5 +146,31 @@
             $produits = $this->getProductList($record_id);
             return array("deletedProductId" => $product_id,"produits" => $produits);
         }
+
+        public function addNewEntry($product_id,$record_id,$qty){
+            $req = "INSERT INTO entrees
+                SET qteEntree = :qty, dateEntree = CURDATE(), id_fiche = :record_id, id_produit = :product_id";
+            $stmt = $this->prepare($req);
+            $stmt->execute(array(":qty" => $qty,":record_id" => $record_id,":product_id" => $product_id));
+
+            $req = "UPDATE produit
+                SET stkDispo = stkDispo + :ajout
+                WHERE id = :id";
+            $stmt = $this->prepare($req);
+            $stmt->execute(array(":ajout" => $qty,":id" => $record_id));
+
+            $entries = $this->getFileEntries($record_id);
+            return array("fileId" => $record_id, "entrees" => $entries);
+        }
+
+        public function getFileEntries($file_id){
+            $req = "SELECT * FROM entrees
+                INNER JOIN produit ON entrees.id_produit = produit.id
+                WHERE id_fiche = :id";
+            $stmt = $this->prepare($req);
+            $stmt->execute(array(":id" => $record['id']));
+            $entrees = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $entrees;
+        }
 	}
 ?>

@@ -4,6 +4,7 @@ $(document).ready(function(){
     var $sortieStock = $(document).find('.conteneurTableSortie');
 
     getFileData(user_id);
+    $selectContainer.append('<button type="button" class="btn btn-primary creationFicheStock">Créer une fiche de stock</button>');
 });
 
 $(document).find(".affichageListeProduit").click(function(){
@@ -34,7 +35,11 @@ $(document).find(".affichageListeProduit").click(function(){
 $(document).find('.createNewEntry').off().on("click", function(){
     if(produits.length > 0){
         var $entreeStockTable = $(document).find('.conteneurTableEntree').find('.tableEntree');
+        $entreeStockTable.html("");
         var $entreeStockForm = $('<form class="entryStockForm"></form>');
+
+        var $entreeStockFormTitle = $('<h3 class="text-center entryStockFormTitle">Création d&rsquo;une entrée</h3>');
+        $entreeStockForm.append($entreeStockFormTitle);
 
         var $qtyDiv = $('<div class="form-group row"></div>');
         var $qtyLabel = $('<label for="entryQty" class="col-md-offset-1 col-md-3 form-control-label">Quantité entrée</label>');
@@ -48,18 +53,48 @@ $(document).find('.createNewEntry').off().on("click", function(){
         var $productDiv = $('<div class="form-group row"></div>');
         var $selectProductLabel = $('<label for="productSelect" class="col-md-offset-1 col-md-3 form-control-label">Produit</label>');
         var $selectProductDiv = $('<div class="col-md-7"></div>');
-        var $selectProduct = $('<select id="productSelect" type="text" class="form-control productSelect">');
+        var $selectProduct = $('<select id="productSelect" class="form-control productSelect">');
+
+        for(var i=0; i<produits.length; i++){
+            var $productSelectOption = $('<option value="'+produits[i].productId+'">'+produits[i].productId+' -- '+produits[i].nomProduit+'</option>');
+            $selectProduct.append($productSelectOption);
+        }
+
         $selectProductDiv.append($selectProduct);
         $productDiv.append($selectProductLabel);
         $productDiv.append($selectProductDiv);
         $entreeStockForm.append($productDiv);
 
-        $entreeStockTable.append($entreeStockForm)
+        $validateEntryButtonDiv = $('<div class="col-md-offset-4 col-md-4"></div>');
+        $validateEntryButton = $('<button type="button" class="btn btn-primary btn-sm confirmEntreeCreation">Sauvegarder l&rsquo;entrée</button>');
+        $validateEntryButtonDiv.append($validateEntryButton);
+        $entreeStockForm.append($validateEntryButtonDiv);
+
+        $validateEntryButton.off().on("click",function(){
+            var quantite = $(document).find(".entryQtyField").val();
+            var selectedProduct = $(document).find(".productSelect").val();
+
+            $.ajax({
+                url: "requests.php",
+                dataType: "json",
+                data:{
+                    user_id: user_id,
+                    qty: quantite,
+                    productId: selectedProduct,
+                    record_id: selected,
+                    req: "addNewEntry"
+                },
+                success:function(data){
+                    produits = data.produits;
+                }
+            });
+        });
+
+        $entreeStockTable.append($entreeStockForm);
     }
 });
 
-$(document).find('.createNewOutage').off().on("click",function(){
-});
+
 
 function getFileData(user_id){
     $.ajax({
@@ -86,7 +121,8 @@ function getFileData(user_id){
                 $entreeStock.css("display","none");
                 $sortieStock.css("display","none");
             }
-        }
+        },
+        async: false
     });
 };
 

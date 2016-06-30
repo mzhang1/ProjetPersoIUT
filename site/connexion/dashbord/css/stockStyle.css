@@ -52,13 +52,15 @@
     margin-bottom: 15px;
 }
 
-.stockContainer .conteneurTable .noProductAvailable{
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .stockContainer .noProductAvailable{
     display: none;
+}
+
+.stockContainer .creationFicheStock{
+    display: block;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .selectContainer,
@@ -95,6 +97,10 @@
 .conteneurTable .conteneurTableEntree .createNewOutage{
     margin-left: auto;
     margin-right: auto;
+}
+
+.stockContainer .conteneurTable .entryStockFormTitle{
+    margin-bottom: 20px;
 }
 
 .fileSelect{
