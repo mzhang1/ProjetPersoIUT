@@ -133,6 +133,40 @@
             $stmt = $this->prepare($req);
             $stmt->execute(array(":name" => $product_name,":price" => $product_price, ":id" => $product_id));
 
+            //Insertion du type
+            $req = "INSERT INTO typeProduit
+                SET libelle_type = :type";
+            $stmt = $this->prepare($req);
+            $stmt->execute(array(":type" => $product_category));
+
+            $req = "SELECT id FROM typeProduit
+                WHERE libelle_type = :type LIMIT 1";
+            $stmt = $this->prepare($req);
+            $stmt->execute(array(":type" => $product_category));
+            $id = $stmt->fetchColumn(0);
+
+            $req = "UPDATE produit
+                SET type_produit_id = :type_id WHERE id = :id";
+            $stmt = $this->prepare($req);
+            $stmt->execute(array(":type_id" => $id, ":id" => $product_id));
+
+            //Insertion du fournisseur
+            $req = "INSERT INTO fournisseur
+                SET libelle_fournisseur = :libelle";
+            $stmt = $this->prepare($req);
+            $stmt->execute(array(":libelle" => $product_supplier));
+
+            $req = "SELECT id FROM fournisseur
+                WHERE libelle_fournisseur = :libelle LIMIT 1";
+            $stmt = $this->prepare($req);
+            $stmt->execute(array(":libelle" => $product_supplier));
+            $supplier_id = $stmt->fetchColumn(0);
+
+            $req = "UPDATE produit
+                SET fournisseur_id = :fournisseur_id WHERE id = :id";
+            $stmt = $this->prepare($req);
+            $stmt->execute(array(":fournisseur_id" => $supplier_id, ":id" => $product_id));
+
             $produits = $this->getProductList($record_id);
             return array("updatedProductId" => $product_id,"produits" => $produits);
         }
